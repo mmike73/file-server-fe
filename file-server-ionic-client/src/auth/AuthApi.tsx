@@ -6,11 +6,13 @@ export type UserDto = {
 }
 
 export const getAccessToken = async () => {
-    try {
-        return await fileServerAxios.post('/refresh-token', { refreshToken: localStorage.getItem('refreshToken') } );
-    } catch {
-        return undefined;
-    }
+    const response = await fileServerAxios.post('/refresh-token', { refreshToken: localStorage.getItem('refreshToken') } );
+    console.log(response);
+    if (response.status !== 200) {
+        console.log("shit");
+        throw new Error(`Status code ${response.status}`);
+    }   
+    return response; 
 }
 
 export const loginUser = async (request: UserDto) => {

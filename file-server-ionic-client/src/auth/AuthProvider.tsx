@@ -139,6 +139,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 try {
                     
                     const response = await getAccessToken();
+                    console.log("muie", attempts);
+
                     const tokens: TokenResponseDto = response?.data;
 
                     if (tokens?.accessToken && tokens?.refreshToken) {
@@ -151,10 +153,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                             }
                         });
                         setRefreshAttempts(0);
+                        console.log("muie muie ", attempts);
                         return; // Success, exit
                     }
                 } catch (err: any) {
                     attempts++;
+                    console.log(attempts);
                     console.error(`Token refresh attempt ${attempts} failed:`, err?.message || err);
 
                     // If it's a 401/403, the refresh token is invalid - don't retry

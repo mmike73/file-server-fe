@@ -12,7 +12,7 @@ export const FileItem: React.FC<FilePropsExt> = ({ id, fileName, size, visibilit
     <IonItem>
       <IonLabel>{fileName}</IonLabel>
       <IonLabel>{size}</IonLabel>
-      <IonLabel>{(visibility === true) ? ("Private") : ("Public")}</IonLabel>
+      <IonLabel>{(visibility == false) ? ("Private") : ("Public")}</IonLabel>
       <IonButton onClick={() => onDelete(id)}>Delete</IonButton>
       <IonButton onClick={() => onDownload(id)}>Download</IonButton>
     </IonItem>
